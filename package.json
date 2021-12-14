@@ -1,0 +1,23 @@
+{
+    "name": "statusmonitor-client",
+    "decription": "A free status monitor solution, used to monitor a machine's resources usage.",
+    "version": "0.0.1",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DottoXD/statusmonitor-client.git"
+    },
+    "author": "DottoXD",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/DottoXD/statusmonitor-client/isssues"
+    },
+    "dependencies": {
+        "fastify": "^3.24.1",
+        "fastify-formbody": "^5.2.0",
+        "node-os-utils": "^1.3.5",
+        "os": "^0.1.2"
+    }
+}
