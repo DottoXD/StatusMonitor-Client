@@ -1,7 +1,0 @@
-{
-	  "name": "your-servers-name",
-    "location": "US", //Put your server's country code here example: US, FR, GB etc
-    "type": "DEDICATED", //Is your server a dedicated server, a vps, a vm or a docker container?
-    "password": "12345", //This is the password used to allow the status page monitor to fetch this machine's status
-    "port": 3000
-}
