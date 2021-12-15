@@ -1,11 +1,5 @@
 const config = require("../config.json");
-const os = require("os");
-const osu = require("node-os-utils");
-
-const cpu = osu.cpu;
-const drive = osu.drive;
-const mem = osu.mem;
-const netstat = osu.netstat;
+const si = require("systeminformation");
 
 async function routes(fastify, options) {
   fastify.get("/", async (request, reply) => {
@@ -18,7 +12,10 @@ async function routes(fastify, options) {
     let usedMem = 0;
     let totalDisk = 0;
     let usedDisk = 0;
-    let osUptime = os.uptime();
+    let totalSwap = 0;
+    let usedSwap = 0;
+    let load = 0;
+    let osUptime = si.time();
 
     function convertSeconds(seconds) {
       seconds = Number(seconds);
@@ -33,31 +30,18 @@ async function routes(fastify, options) {
       var sDisplay = s > 0 ? s + (s == 1 ? "s" : "s") : "";
       return dDisplay + hDisplay + mDisplay + sDisplay;
     }
-
-    await netstat.inOut().then((networkStats) => (networkIn = networkStats));
-    await netstat.inOut().then((networkStats) => (networkOut = networkStats));
-    await cpu.usage().then((cpuPercentage) => (cpuUsage = cpuPercentage));
-    await mem.info().then((memoryInfo) => (totalMem = memoryInfo.totalMemMb * Math.pow(1024, 1)));
-    await mem.info().then((memoryInfo) => (usedMem = memoryInfo.usedMemMb * Math.pow(1024, 1)));
-    await drive.info().then((driveInfo) => (totalDisk = driveInfo.totalGb * Math.pow(1024, 1)));
-    await drive.info().then((driveInfo) => (usedDisk = driveInfo.usedGb * Math.pow(1024, 1)));
-
-    let newNetworkIn = 0;
-    let newNetworkOut = 0;
-
-    if (!networkIn || networkIn === "not supported") {
-      networkIn = 0;
-    } else {
-      newNetworkIn = networkIn.total.inputMb;
-    }
+      
+    await si.currentLoad().then(cpuPercentage => cpuUsage = Math.round(cpuPercentage.currentLoad));
+    await si.mem().then((memoryInfo) => (totalMem = memoryInfo.total * Math.pow(1024, -1)));
+    await si.mem().then((memoryInfo) => (usedMem = memoryInfo.used * Math.pow(1024, -1)));
+    await si.fsSize().then((driveInfo) => (totalDisk = driveInfo[0].size * Math.pow(1024, -2)));
+    await si.fsSize().then((driveInfo) => (usedDisk = driveInfo[0].used * Math.pow(1024, -2)));
+    await si.mem().then((swapInfo) => (totalSwap = swapInfo.swaptotal * Math.pow(1024, -1)));
+    await si.mem().then((swapInfo) => (usedSwap = swapInfo.swapused * Math.pow(1024, -1)));
+    await si.networkStats().then((networkStats) => (networkIn = networkStats[0].rx_bytes));
+    await si.networkStats().then((networkStats) => (networkOut = networkStats[0].tx_bytes));
     
-    if (!networkOut || networkOut === "not supported") {
-      networkOut = 0;
-    } else {
-      newNetworkOut = networkOut.total.outputMb;
-    }
-
-    let convertedUptime = await convertSeconds(osUptime);
+    let convertUptime = await convertSeconds(osUptime.uptime);
 
     return await reply.send({
       name: config.name,
@@ -66,17 +50,18 @@ async function routes(fastify, options) {
       location: config.location,
       online4: true,
       online6: false,
-      uptime: convertedUptime,
-      network_rx: newNetworkIn,
-      network_tx: newNetworkOut,
+      uptime: convertUptime,
+      network_rx: networkIn,
+      network_tx: networkOut,
       cpu: cpuUsage,
       memory_total: totalMem,
       memory_used: usedMem,
-      swap_total: 0,
-      swap_used: 0,
+      swap_total: totalSwap,
+      swap_used: usedSwap,
       hdd_total: totalDisk,
       hdd_used: usedDisk,
       custom: "",
+      load: 0
     });
   });
 }
