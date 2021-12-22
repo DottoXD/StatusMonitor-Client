@@ -1,0 +1,13 @@
+[Unit]
+Description=index.js - statusmonitor client
+Documentation=https://example.com
+After=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/node /etc/statusmonitor/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
