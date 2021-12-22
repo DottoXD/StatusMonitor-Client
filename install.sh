@@ -9,10 +9,10 @@ apt install curl
 curl -sL https://deb.nodesource.com/setup_17.x | sudo bash -
 apt install -y nodejs git
 
-content=`wget https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/servicefile`
+content=`wget https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/statusmonitor.service`
 
 
-mv ./servicefile /lib/systemd/system/statusmonitor.service
+mv ./statusmonitor.service /lib/systemd/system/statusmonitor.service
 
 mkdir /etc/statusmonitor && cd /etc/statusmonitor
 git clone https://github.com/DottoXD/statusmonitor-client .
