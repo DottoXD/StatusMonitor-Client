@@ -12,7 +12,7 @@ apt install -y nodejs git
 content=`wget https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/servicefile`
 
 
-mv ./43DphpG9 /lib/systemd/system/statusmonitor.service
+mv ./servicefile /lib/systemd/system/statusmonitor.service
 
 mkdir /etc/statusmonitor && cd /etc/statusmonitor
 git clone https://github.com/DottoXD/statusmonitor-client .
