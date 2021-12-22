@@ -37,3 +37,10 @@ Note: The script is a beta version and may have bugs! Please open an issue to re
 ```
 wget -O - https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/install.sh | sh
 ```
+
+## uninstall script
+[Here!](https://github.com/DottoXD/statusmonitor-client/blob/main/uninstall.sh)
+Note: The script is a beta version and may have bugs! Please open an issue to report any bug!
+```
+wget -O - https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/uninstall.sh | sh
+```
