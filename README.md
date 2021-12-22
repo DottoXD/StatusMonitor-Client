@@ -2,11 +2,8 @@
 A free status monitor solution, used to monitor a machine's resources usage. Developed in NodeJS, this is an early version.
 You can selfhost a [statusmonitor-server](https://github.com/DottoXD/statusmonitor-server) instance and connect those 2, you will get a beautiful status page that shows your machines stats.
 
-# update 0.0.3
-+ added a swap usage monitor
-+ added a network usage monitor
-+ now using a better package to fetch stats
-+ improved response times
+# update 0.0.4
++ added an installer for vpses / dedis
 
 # features
 This project can currently monitor the ram usage, the cpu usage, the disk usage and the system uptime.
@@ -34,4 +31,5 @@ npm install
 node index.js
 ```
 
-## i will make a script used to enable this on startup soon.
+## install script
+[Here!](https://github.com/DottoXD/statusmonitor-client/blob/main/install.sh)
