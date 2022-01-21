@@ -6,7 +6,7 @@ if [ $USER != root ]
   exit
 fi
 apt install curl
-curl -sL https://deb.nodesource.com/setup_17.x | sudo bash -
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
 apt install -y nodejs git
 
 content=`wget https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/statusmonitor.service`
