@@ -7,6 +7,8 @@ async function routes(fastify, options) {
 
     let networkIn = 0;
     let networkOut = 0;
+    let networkInSec = 0;
+    let networkOutSec = 0;
     let cpuUsage = 0;
     let totalMem = 0;
     let usedMem = 0;
@@ -40,6 +42,8 @@ async function routes(fastify, options) {
     await si.mem().then((swapInfo) => (usedSwap = swapInfo.swapused * Math.pow(1024, -1)));
     await si.networkStats().then((networkStats) => (networkIn = networkStats[0].rx_bytes));
     await si.networkStats().then((networkStats) => (networkOut = networkStats[0].tx_bytes));
+    await si.networkStats().then((networkStats) => (networkInSec = networkStats[0].rx_sec));
+    await si.networkStats().then((networkStats) => (networkOutSec = networkStats[0].tx_sec));
     
     let convertUptime = await convertSeconds(osUptime.uptime);
 
@@ -52,7 +56,8 @@ async function routes(fastify, options) {
       online6: false,
       uptime: convertUptime,
       network_rx: networkIn,
-      network_tx: networkOut,
+      network_rx_sec: networkInSec,
+      network_tx_sec: networkOutSec,
       cpu: cpuUsage,
       memory_total: totalMem,
       memory_used: usedMem,
