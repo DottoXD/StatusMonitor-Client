@@ -1,11 +1,11 @@
 # !/bin/bash
 
-if [ $USER != root ]
+if [ $UID !== 0 ]
  then
   printf "Please run this as root! \n"
   exit
 fi
-apt install curl
+apt install sudo curl
 curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
 apt install -y nodejs git
 
