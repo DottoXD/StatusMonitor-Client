@@ -38,7 +38,6 @@ async function routes(fastify, options) {
     });
 
     await si.fsSize().then((diskInfo) => {
-      console.log(diskInfo)
       TotalDisk = diskInfo[0].size;
       UsedDisk = diskInfo[0].used;
     });
