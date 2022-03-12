@@ -4,8 +4,6 @@ const os = require("os");
 
 async function routes(fastify, options) {
   fastify.get("/", async (request, reply) => {
-    if (config.password && request.headers.password !== config.password) return reply.send({ error: "unauthorised" });
-
     let NetworkIn = 0;
     let NetworkOut = 0;
     let NetworkInSec = 0;

@@ -2,6 +2,5 @@
     "name": "your-servers-name",
     "location": "US",
     "type": "DEDICATED",
-    "password": "",
     "port": 3000
 }
