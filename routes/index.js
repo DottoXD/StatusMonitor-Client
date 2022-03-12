@@ -1,23 +1,24 @@
 const config = require("../config.json");
 const si = require("systeminformation");
+const os = require("os");
 
 async function routes(fastify, options) {
   fastify.get("/", async (request, reply) => {
     if (config.password && request.headers.password !== config.password) return reply.send({ error: "unauthorised" });
 
-    let networkIn = 0;
-    let networkOut = 0;
-    let networkInSec = 0;
-    let networkOutSec = 0;
-    let cpuUsage = 0;
-    let totalMem = 0;
-    let usedMem = 0;
-    let totalDisk = 0;
-    let usedDisk = 0;
-    let totalSwap = 0;
-    let usedSwap = 0;
-    let load = 0;
-    let osUptime = si.time();
+    let NetworkIn = 0;
+    let NetworkOut = 0;
+    let NetworkInSec = 0;
+    let NetworkOutSec = 0;
+    let CpuUsage = 0;
+    let TotalMem = 0;
+    let UsedMem = 0;
+    let TotalDisk = 0;
+    let UsedDisk = 0;
+    let TotalSwap = 0;
+    let UsedSwap = 0;
+    let SystemLoad = 0;
+    let OsUptime = si.time();
 
     function convertSeconds(seconds) {
       seconds = Number(seconds);
@@ -32,20 +33,33 @@ async function routes(fastify, options) {
       var sDisplay = s > 0 ? s + (s == 1 ? "s" : "s") : "";
       return dDisplay + hDisplay + mDisplay + sDisplay;
     }
-      
-    await si.currentLoad().then(cpuPercentage => cpuUsage = Math.round(cpuPercentage.currentLoad));
-    await si.mem().then((memoryInfo) => (totalMem = memoryInfo.total * Math.pow(1024, -1)));
-    await si.mem().then((memoryInfo) => (usedMem = memoryInfo.used * Math.pow(1024, -1)));
-    await si.fsSize().then((driveInfo) => (totalDisk = driveInfo[0].size * Math.pow(1024, -2)));
-    await si.fsSize().then((driveInfo) => (usedDisk = driveInfo[0].used * Math.pow(1024, -2)));
-    await si.mem().then((swapInfo) => (totalSwap = swapInfo.swaptotal * Math.pow(1024, -1)));
-    await si.mem().then((swapInfo) => (usedSwap = swapInfo.swapused * Math.pow(1024, -1)));
-    await si.networkStats().then((networkStats) => (networkIn = networkStats[0].rx_bytes));
-    await si.networkStats().then((networkStats) => (networkOut = networkStats[0].tx_bytes));
-    await si.networkStats().then((networkStats) => (networkInSec = networkStats[0].rx_sec));
-    await si.networkStats().then((networkStats) => (networkOutSec = networkStats[0].tx_sec));
+
+    await si.currentLoad().then((systemLoad) => {
+      CpuUsage = Math.round(systemLoad.currentLoad);
+      SystemLoad = Math.round(systemLoad.avgLoad);
+    });
+
+    await si.fsSize().then((diskInfo) => {
+      console.log(diskInfo)
+      TotalDisk = diskInfo[0].size;
+      UsedDisk = diskInfo[0].used;
+    });
+
+    await si.mem().then((memoryInfo) => {
+      TotalMem = memoryInfo.total;
+      UsedMem = memoryInfo.used;
+      TotalSwap = memoryInfo.swaptotal;
+      UsedSwap = memoryInfo.swapused;
+    });
+
+    await si.networkStats().then((networkStats) => {
+      NetworkIn = networkStats[0].rx_bytes;
+      NetworkOut = networkStats[0].tx_bytes;
+      NetworkInSec = networkStats[0].rx_sec;
+      NetworkOutSec = networkStats[0].tx_sec;
+    });
     
-    let convertUptime = await convertSeconds(osUptime.uptime);
+    let convertUptime = await convertSeconds(OsUptime.uptime);
 
     return await reply.send({
       name: config.name,
@@ -53,20 +67,19 @@ async function routes(fastify, options) {
       host: config.name,
       location: config.location,
       online4: true,
-      online6: false,
       uptime: convertUptime,
-      network_rx: networkIn,
-      network_rx_sec: networkInSec,
-      network_tx_sec: networkOutSec,
-      cpu: cpuUsage,
-      memory_total: totalMem,
-      memory_used: usedMem,
-      swap_total: totalSwap,
-      swap_used: usedSwap,
-      hdd_total: totalDisk,
-      hdd_used: usedDisk,
-      custom: "",
-      load: 0
+      network_rx: NetworkIn,
+      network_tx: NetworkOut,
+      network_rx_sec: NetworkInSec,
+      network_tx_sec: NetworkOutSec,
+      cpu: CpuUsage,
+      memory_total: TotalMem,
+      memory_used: UsedMem,
+      swap_total: TotalSwap,
+      swap_used: UsedSwap,
+      disk_total: TotalDisk,
+      disk_used: UsedDisk,
+      load: SystemLoad,
     });
   });
 }

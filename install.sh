@@ -20,4 +20,4 @@ git clone https://github.com/DottoXD/statusmonitor-client .
 npm install
 
 systemctl enable --now statusmonitor
-printf "StatusMonitor - Client by Dotto has been installed! Make sure to configure /etc/statusmonitor/config.json and then systemctl restart statusmonitor! \n"
+printf "StatusMonitor - Client by DottoXD has been installed! Make sure to configure /etc/statusmonitor/config.json and then systemctl restart statusmonitor! \n"
