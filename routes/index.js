@@ -16,6 +16,7 @@ async function routes(fastify, options) {
     let TotalSwap = 0;
     let UsedSwap = 0;
     let SystemLoad = 0;
+    let NetworkLatency = 0;
     let OsUptime = si.time();
 
     function convertSeconds(seconds) {
@@ -56,6 +57,8 @@ async function routes(fastify, options) {
       NetworkOutSec = networkStats[0].tx_sec;
     });
     
+    await si.inetLatency().then((Data) => NetworkLatency = Data);
+    
     let convertUptime = await convertSeconds(OsUptime.uptime);
 
     return await reply.send({
@@ -77,6 +80,7 @@ async function routes(fastify, options) {
       disk_total: TotalDisk,
       disk_used: UsedDisk,
       load: SystemLoad,
+      ping: Math.round(NetworkLatency),
     });
   });
 }
