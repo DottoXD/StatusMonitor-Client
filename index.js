@@ -1,4 +1,4 @@
-const fastify = require("fastify")({ logger: true })
+const fastify = require("fastify")({ logger: true, ignoreTrailingSlash: true })
 const { port } = require("./config.json")
 
 fastify.register(require("./routes/index.js"))
