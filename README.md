@@ -2,8 +2,10 @@
 A free status monitor solution, used to monitor a machine's resources usage. Developed in NodeJS.
 You can selfhost [statusmonitor-server](https://github.com/DottoXD/statusmonitor-server) to export your machine's stats on an awesome status page.
 
-# update 1.0.0
+# update 1.0.3
 + first stable release
++ (1.0.3) ping support
++ (1.0.3) bux fixes
 
 # features
 This project can currently monitor the ram, cpu and disk usage along with the system load and the system uptime.
