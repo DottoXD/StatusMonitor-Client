@@ -1,48 +1,61 @@
-# statusmonitor-client
-A free status monitor solution, used to monitor a machine's resources usage. Developed in NodeJS.
-You can selfhost [statusmonitor-server](https://github.com/DottoXD/statusmonitor-server) to export your machine's stats on an awesome status page.
+# StatusMonitor Client
 
-# update 1.0.3
-+ first stable release
-+ (1.0.3) ping support
-+ (1.0.3) bux fixes
+A free, efficient and open source status monitoring solution.
+You can selfhost [StatusMonitor Server](https://github.com/DottoXD/StatusMonitor-Server) to export your machine's stats on an awesome status page.
 
-# features
-This project can currently monitor the ram, cpu and disk usage along with the system load and the system uptime.
-Tested on dedicated servers, vpses, vms and docker containers.
+# Last updates
 
-# known issues
+## 2.0
+
+WIP.
+
+# Features
+
+This project can currently monitor the RAM, CPU and Disk usage along with the system's load value and the system's uptime.
+This works perfectly on dedicated servers, VPSes, VMs and Docker containers.
+You can use [StatusMonitor Process](https://github.com/DottoXD/StatusMonitor-Process) to monitor a NodeJS process' stats with ease.
+
+# Known issues
+
 There are no known issues at the moment.
 
-# simple setup guide
-You can easily setup [statusmonitor-client](https://github.com/DottoXD/statusmonitor-client) in 3 steps!
+# Setup
+
+You can easily setup [StatusMonitor Client](https://github.com/DottoXD/StatusMonitor-Client) in 3 steps! (Or alternatively use the install script below this).
 
 **Step one: clone the repo:**
-*make sure to do this in an empty directory!*
+_make sure to do this in an empty directory!_
+
 ```
-git clone https://github.com/DottoXD/statusmonitor-client .
+git clone https://github.com/DottoXD/StatusMonitor-Client .
 ```
 
 **Step two: install every dependency!**
+
 ```
 npm install
 ```
 
 **Step three: start the server!**
+
 ```
-node index.js
+npm run start:prod
 ```
 
-## install script
-[Here!](https://github.com/DottoXD/statusmonitor-client/blob/main/install.sh)
-Note: The script is a beta version and may have bugs! Please open an issue to report any bug!
+## Install script
+
+[Click here!](https://github.com/DottoXD/StatusMonitor-Client/blob/main/Install.sh)
+Note: The script should work just fine, but make sure to open an [issue](https://github.com/DottoXD/StatusMonitor-Client/issues) or a [pull request](https://github.com/DottoXD/StatusMonitor-Client/pulls) if you find any bugs!
+
 ```
-wget -O - https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/install.sh | sh
+wget -O - https://raw.githubusercontent.com/DottoXD/StatusMonitor-Client/main/Install.sh | sh
 ```
 
-## uninstall script
-[Here!](https://github.com/DottoXD/statusmonitor-client/blob/main/uninstall.sh)
-Note: The script is a beta version and may have bugs! Please open an issue to report any bug!
+## Uninstall script
+
+[Click here!](https://github.com/DottoXD/StatusMonitor-Client/blob/main/Uninstall.sh)
+Note: The script should work just fine, but make sure to open an [issue](https://github.com/DottoXD/StatusMonitor-Client/issues) or a [pull request](https://github.com/DottoXD/StatusMonitor-Client/pulls) if you find any bugs!
+
 ```
-wget -O - https://raw.githubusercontent.com/DottoXD/statusmonitor-client/main/uninstall.sh | sh
+wget -O - https://raw.githubusercontent.com/DottoXD/StatusMonitor-Client/main/Uninstall.sh | sh
 ```

@@ -1,21 +1,30 @@
 {
-    "name": "statusmonitor-client",
-    "decription": "A free status monitor solution, used to monitor a machine's resources usage.",
-    "version": "1.0.0",
-    "scripts": {
-        "start": "node index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/DottoXD/statusmonitor-client.git"
-    },
-    "author": "DottoXD",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/DottoXD/statusmonitor-client/isssues"
-    },
-    "dependencies": {
-        "fastify": "^3.27.4",
-        "systeminformation": "^5.11.8"
-    }
+	"name": "@statusmonitor/client",
+	"private": true,
+	"decription": "A simple, free and open source status monitoring solution.",
+	"version": "2.0.0",
+	"scripts": {
+		"start": "node build/index.js",
+		"build": "tsc",
+		"start:prod": "npm run prettier && npm run build && npm start",
+		"prettier": "prettier --write ."
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DottoXD/StatusMonitor-Client.git"
+	},
+	"author": "DottoXD",
+	"license": "GPL-3.0-only",
+	"bugs": {
+		"url": "https://github.com/DottoXD/StatusMonitor-Client/isssues"
+	},
+	"dependencies": {
+		"systeminformation": "^5.21.24",
+		"undici": "6.4.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.11.7",
+		"prettier": "^3.2.4",
+		"typescript": "^5.3.3"
+	}
 }

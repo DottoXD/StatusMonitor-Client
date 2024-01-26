@@ -1,6 +1,0 @@
-{
-    "name": "your-servers-name",
-    "location": "US",
-    "type": "DEDICATED",
-    "port": 3000
-}
