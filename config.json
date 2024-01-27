@@ -1,7 +1,8 @@
 {
 	"agent": {
 		"name": "Agent",
-		"interval": 30000
+		"interval": 30000,
+		"pingIp": "1.1.1.1"
 	},
 	"remote": {
 		"protocol": "HTTPS",

@@ -15,4 +15,7 @@ export default interface Data {
 	netTx: number;
 	netRxSec: number;
 	netTxSec: number;
+	uptime: number;
+	latency: number;
+	platform: string;
 }
