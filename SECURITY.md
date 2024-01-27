@@ -8,4 +8,5 @@
 | < 1.x   | :x:                |
 
 ## Reporting a Vulnerability
+
 Please open a GitHub issue to report a vulnerability on StatusMonitor.

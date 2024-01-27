@@ -1,0 +1,19 @@
+{
+	"agent": {
+		"name": "Agent",
+		"interval": 30000
+	},
+	"remote": {
+		"protocol": "HTTPS",
+		"host": "domain.com",
+		"port": 443,
+		"key": "Secret"
+	},
+	"proxy": {
+		"type": "HTTP",
+		"host": "",
+		"port": "",
+		"username": "",
+		"password": ""
+	}
+}
